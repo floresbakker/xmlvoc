@@ -264,7 +264,8 @@ xml: {
     rdfs:isDefinedBy xml:.
     
   xml:id
-    a owl:DatatypeProperty;
+    a owl:DatatypeProperty,
+    xml:Attribute;
     xml:key 'id';
     rdfs:domain xml:Element;
     rdfs:range xsd:string;
@@ -274,7 +275,8 @@ xml: {
     rdfs:isDefinedBy xml:.
 
   xml:name
-    a owl:DatatypeProperty;
+    a owl:DatatypeProperty,
+    xml:Attribute;
     xml:key 'name';
     rdfs:domain xml:Element;
     rdfs:range xsd:string;
@@ -284,7 +286,8 @@ xml: {
     rdfs:isDefinedBy xml:.
 
   xml:base
-    a owl:DatatypeProperty;
+    a owl:DatatypeProperty,
+    xml:Attribute;
     xml:key 'base';
     rdfs:subPropertyOf xml:attribute;
     rdfs:domain xml:Element;
@@ -294,7 +297,8 @@ xml: {
     rdfs:isDefinedBy xml:.
 
   xml:lang
-    a owl:DatatypeProperty;
+    a owl:DatatypeProperty,
+    xml:Attribute;
     xml:key 'lang';
     rdfs:subPropertyOf xml:attribute;
     rdfs:domain xml:Element;
@@ -304,7 +308,8 @@ xml: {
     rdfs:isDefinedBy xml:.
 
   xml:space
-    a owl:DatatypeProperty;
+    a owl:DatatypeProperty,
+    xml:Attribute;
     xml:key 'space';
     rdfs:subPropertyOf xml:attribute;
     rdfs:domain xml:Element;
@@ -339,7 +344,7 @@ select $this {
   filter not exists { $this xml:fragment []. }
   
   # ...but whose child nodes (if any) all have an xml fragment
-  minus {
+  filter not exists {
     $this ?member ?child.
     filter(strstarts(str(?member),concat(str(rdf:),'_')))               
     filter not exists { ?child xml:fragment []. }
