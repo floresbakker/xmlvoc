@@ -1,2 +1,21 @@
+
 # xmlvoc
-A RDF-based representation of the XML-vocabulary to express, parse, generate and validate XML-documents in RDF.
+
+This is the repository for the specification of xmlvoc, the semantic XML Core Ontology. You're welcome to contribute! 
+
+# Introduction
+
+The XML Core Ontology provides a formal representation of the Extensible Markup Language (XML) Version 1.0 (Fifth Edition). It defines classes and properties to describe the structure and semantics of XML documents, elements, attributes, comments, processing instructions, CDATA sections, and text elements. In addition, it includes SHACL shapes with algorithms for XML code serialization. This enables the generation of XML from RDF representations and the parsing of XML into RDF, offering comprehensive control and detailed description of XML content. This vocabulary enhances data management and integration, bridging XML and semantic technologies. The XML Core Ontology supports the use of domain specific extensions that are XML-based, like SVG, Archimate, XBRL and more. 
+
+# Description
+
+The XML Ontology formalizes the Extensible Markup Language (XML) Version 1.0 (Fifth Edition), offering a structured representation of its components and features. It defines classes to represent XML elements, datatype properties to represent XML attributes, and a small number of SHACL shapes with algorithms for the serialization of XML code. Central to this ontology is the class 'xml:Element', which represents an XML DOM element and is a subclass of 'dom:Element', the class encompassing all DOM elements. Any specific XML element from a domain specific extension of XML, like 'svg:Circle' in the SVG vocabulary, is a subclass of 'xml:Element'. Another fundamental component of this ontology is the 'xml:attribute' datatype property. Any attribute in XML, such as 'xml:id' or 'xml:class', is a subproperty of 'xml:attribute' and an individual of the class xml:Attribute. XML attributes can be standard attributes defined in the XML specification or custom-defined attributes. Additionally, there is the class of 'xml:Text', where all instantiations contain an 'xml:fragment' property relation with an actual textual string, as exemplified in the triples 'doc:1.0 a xml:Text; xml:fragment "Hello, World!".'. Together, these classes and attributes can represent any XML document in RDF. To serialize this XML document into actual XML code, there is the SHACL node shape shp:SerializableNode that processes the RDF structure and transforms it into XML code. The logic behind this shape is that the XML code can be serialized from the leaves of the tree upwards to the root of the XML document. This means that any arbitrary element in the DOM tree of an XML document can only be serialized to XML code when the underlying child elements of that element have already been serialized, including the XML code of attributes and their values. The outer edges of the tree consist of elements that do not contain child elements and can therefore be transformed into XML code immediately without needing any context, along with XML text elements that already contain XML fragments with textual strings. From the outer edges, the node shape shp:SerializableNode works its way up the tree until all XML elements have received an XML fragment, allowing the XML document to be created based on the 'xml:fragment' contained in the root element of that document. The processing halts the moment the document itself has an 'xml:fragment' attribute.
+
+# Status
+
+Stable, but no release yet. Work in progress.
+
+# Background
+
+In an era where information flows ceaselessly, organizations must confront multiple pressing challenges regarding velocity, variety, insightfulness, adaptability, and validity. The speed at which information is generated, transformed, and consumed is unprecedented. Keeping pace with this velocity is essential for timely decision-making. Information is available in diverse formats, ranging from structured data to unstructured text and multimedia. Effective management necessitates the ability to handle this rich variety seamlessly. Information is not merely data; it embodies insights, functionality, and knowledge. Extracting meaningful insights and practical functionality is vital for organizational success. Organizations must be agile in adapting information products to swiftly address emerging challenges and opportunities. Finally, ensuring the correctness, compliance, and reliability of information is fundamental to trustworthy decision-making and operations.
+
